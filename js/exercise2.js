@@ -22,14 +22,19 @@ function increase_fontsize(event) {
 }
 
 function decrease_fontsize(event) {
+    let balloon = document.getElementById("balloon");
+
+    //finds current size of ballon
+    let current_size = parseFloat(window.getComputedStyle(balloon).fontSize); //parseFloat changes the fontsize (which is string) to a float
+
     if (event.key === "ArrowDown") {
         //prevents arrowup to scroll on page 
         event.preventDefault();
-
-        let balloon = document.getElementById("balloon");
-
-        //finds current size of ballon
-        let current_size = parseFloat(window.getComputedStyle(balloon).fontSize); //parseFloat changes the fontsize (which is string) to a float
+        
+        if (current_size <= 5) {
+            //nothing happens if the ballon is already less than 5 px
+            return;
+        }
 
         //new fond size of ballon
         balloon.style.fontSize = (current_size / 1.1) + "px";
